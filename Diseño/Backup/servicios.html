@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Servicios - Hosanna</title>
+    <style>
+        :root { --p: #5D4037; --a: #C5A059; --bg: #F9F7F2; }
+        body { background: var(--bg); font-family: 'Georgia', serif; margin: 0; text-align: center; }
+        header { background: var(--p); color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-family: sans-serif; }
+        
+        /* Diseño con CSS (Punto 3.58) */
+        .grid { display: flex; justify-content: center; gap: 20px; padding: 20px; flex-wrap: wrap; }
+        .card { background: white; padding: 20px; border: 1px solid var(--a); width: 260px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        
+        /* Oculto inicialmente para "Mostrar más" */
+        .info-oculta { display: none; margin-top: 10px; font-size: 0.85rem; color: #555; background: #fff8e1; padding: 10px; border-radius: 4px; }
+        
+        /* Tabla comparativa (Punto 3.59) */
+        table { width: 90%; max-width: 800px; margin: 30px auto; border-collapse: collapse; background: white; }
+        th, td { border: 1px solid var(--p); padding: 12px; }
+        th { background: var(--p); color: white; }
+
+        .btn { background: var(--a); border: none; padding: 10px; cursor: pointer; font-weight: bold; color: var(--p); margin: 5px; border-radius: 4px; }
+        #lista-dinamica { text-align: left; max-width: 500px; margin: 20px auto; background: white; padding: 15px; border: 1px solid var(--p); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>HOSANNA</h1>
+        <nav>
+            <a href="index.html" data-i18n="inicio">Inicio</a>
+            <a href="nosotros.html" data-i18n="nosotros">Nosotros</a>
+            <a href="servicios.html" data-i18n="cachorros">Cachorros</a>
+            <a href="contacto.html" data-i18n="contacto">Contacto</a>
+            <a href="login.html" data-i18n="login">Iniciar Sesión</a>
+            
+            <select id="selector-idioma" onchange="cambiarIdioma(this.value)" style="margin-left:15px; padding:5px;">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+            </select>
+            <button onclick="toggleAltoContraste()" title="Modo Alto Contraste" style="cursor:pointer; padding:5px; margin-left:10px;">🌗</button>
+        </nav>
+        <div id="breadcrumbs" style="padding: 10px 40px; font-size: 0.85rem; background: #eee; color: #555;"></div>
+    </header>
+
+    <section>
+        <h2>Nuestros Servicios / Productos</h2>
+        
+        <div style="margin: 20px;">
+            <label style="font-weight: bold;">Filtrar Género: </label>
+            <select id="selector-filtro" class="btn">
+                <option value="todos">Todos</option>
+                <option value="macho">Machos</option>
+                <option value="hembra">Hembras</option>
+            </select>
+        </div>
+
+        <div class="grid">
+            <div class="card" data-g="macho">
+                <h3>Golden King</h3>
+                <p>Categoría: Macho</p>
+                <div class="info-oculta">Línea de sangre americana con 3 campeonatos ganados.</div>
+                <button class="btn" onclick="verMas(this)">Mostrar más información</button> <button class="btn" onclick="nuevoFavorito('Golden King')">Agregar a interés</button> </div>
+
+            <div class="card" data-g="hembra">
+                <h3>Silver Moon</h3>
+                <p>Categoría: Hembra</p>
+                <div class="info-oculta">Línea europea ideal para ambiente familiar y niños.</div>
+                <button class="btn" onclick="verMas(this)">Mostrar más información</button>
+                <button class="btn" onclick="nuevoFavorito('Silver Moon')">Agregar a interés</button>
+            </div>
+
+            <div class="card" data-g="macho">
+                <h3>Midnight</h3>
+                <p>Categoría: Macho</p>
+                <div class="info-oculta">Cachorro de 3 meses, vacunado y con microchip.</div>
+                <button class="btn" onclick="verMas(this)">Mostrar más información</button>
+                <button class="btn" onclick="nuevoFavorito('Midnight')">Agregar a interés</button>
+            </div>
+        </div>
+
+        <div id="lista-dinamica">
+            <h4 style="margin-top:0;">Mi Lista de Interés:</h4>
+            <ul id="contenedor-items" style="padding-left: 20px;">
+                </ul>
+        </div>
+
+        <table>
+            <thead>
+                <tr><th>Línea</th><th>Temperamento</th><th>Mantenimiento</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Americana</td><td>Activo</td><td>Medio</td></tr>
+                <tr><td>Europea</td><td>Elegante</td><td>Alto</td></tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <section>
+        <h2>Cachorros y Productos de Cuidado</h2>
+        
+        <div style="margin: 20px;">
+            <input type="text" id="buscador-sitio" placeholder="Buscar productos, champú, afganos..." data-i18n="buscar" onkeyup="buscarContenido()" style="width: 300px; padding: 10px;">
+        </div>
+    
+        <div class="grid" id="catalogo-items">
+            <div class="card" data-tags="macho afgano perro mascota golden king">
+                <h3>Golden King</h3>
+                <p>Precio: $1,200</p>
+                <button class="btn" onclick="agregarAlCarrito('Golden King', 1200)">Agregar al carrito</button>
+            </div>
+            <div class="card" data-tags="hembra afgano perro mascota silver moon">
+                <h3>Silver Moon</h3>
+                <p>Precio: $1,500</p>
+                <button class="btn" onclick="agregarAlCarrito('Silver Moon', 1500)">Agregar al carrito</button>
+            </div>
+            <div class="card" data-tags="champu pelo cuidado baño producto">
+                <h3>Champú Especial Manto Largo</h3>
+                <p>Precio: $45</p>
+                <button class="btn" onclick="agregarAlCarrito('Champú Especial', 45)">Agregar al carrito</button>
+            </div>
+            <div class="card" data-tags="cepillo metalico cuidado herramienta producto">
+                <h3>Cepillo Metálico Profesional</h3>
+                <p>Precio: $30</p>
+                <button class="btn" onclick="agregarAlCarrito('Cepillo Metálico', 30)">Agregar al carrito</button>
+            </div>
+        </div>
+    
+        <div id="carrito-contenedor" style="margin: 40px auto; max-width: 600px; background: white; padding: 20px; border: 2px solid var(--accent);">
+            <h3 data-i18n="carrito">Carrito de Compras</h3>
+            <ul id="lista-carrito" style="text-align: left;"></ul>
+            <h4 style="text-align: right;">Total: $<span id="total-carrito">0</span></h4>
+        </div>
+    </section>
+    
+    <script>
+        // --- 8. BÚSQUEDA DENTRO DEL SITIO ---
+        function buscarContenido() {
+            const query = document.getElementById('buscador-sitio').value.toLowerCase();
+            const items = document.querySelectorAll('#catalogo-items .card');
+            
+            items.forEach(item => {
+                const tags = item.getAttribute('data-tags').toLowerCase();
+                const titulo = item.querySelector('h3').innerText.toLowerCase();
+                // Muestra dinámicamente si coincide el título o las etiquetas
+                if (tags.includes(query) || titulo.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    
+        // --- 7 y 11. CARRITO DE COMPRAS CON LOCALSTORAGE ---
+        let carrito = JSON.parse(localStorage.getItem('carritoCompras')) || [];
+    
+        function agregarAlCarrito(nombre, precio) {
+            carrito.push({ nombre, precio });
+            guardarYRenderizarCarrito();
+        }
+    
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
+            guardarYRenderizarCarrito();
+        }
+    
+        function guardarYRenderizarCarrito() {
+            localStorage.setItem('carritoCompras', JSON.stringify(carrito));
+            
+            const lista = document.getElementById('lista-carrito');
+            const spanTotal = document.getElementById('total-carrito');
+            lista.innerHTML = '';
+            let total = 0;
+    
+            carrito.forEach((item, index) => {
+                total += item.precio;
+                lista.innerHTML += `
+                    <li style="margin-bottom: 10px; display: flex; justify-content: space-between;">
+                        <span>${item.nombre} - $${item.precio}</span>
+                        <button onclick="eliminarDelCarrito(${index})" style="background: red; color: white; border: none; cursor:pointer;">X Eliminar</button>
+                    </li>
+                `;
+            });
+            spanTotal.innerText = total;
+        }
+    
+        // Renderizar al cargar la página
+        document.addEventListener('DOMContentLoaded', guardarYRenderizarCarrito);
+    </script>
+
+    <script>
+        // 1. FILTRAR (DOM: Filtro dinámico de contenido - Punto 3.41)
+        document.getElementById('selector-filtro').addEventListener('change', function() {
+            const seleccion = this.value;
+            const tarjetas = document.querySelectorAll('.card');
+            
+            tarjetas.forEach(t => {
+                if (seleccion === 'todos' || t.getAttribute('data-g') === seleccion) {
+                    t.style.display = 'block';
+                } else {
+                    t.style.display = 'none';
+                }
+            });
+        });
+
+        // 2. MOSTRAR MÁS (DOM: Mostrar más información - Punto 3.63)
+        function verMas(boton) {
+            const texto = boton.parentElement.querySelector('.info-oculta');
+            if (texto.style.display === "block") {
+                texto.style.display = "none";
+                boton.innerText = "Mostrar más información";
+            } else {
+                texto.style.display = "block";
+                boton.innerText = "Ocultar información";
+            }
+        }
+
+        // 3. AGREGAR / ELIMINAR (DOM: Agregar elementos dinámicamente - Punto 3.37, 3.38)
+        function nuevoFavorito(nombre) {
+            const ul = document.getElementById('contenedor-items');
+            const li = document.createElement('li'); // Creación de elemento
+            
+            li.style.marginBottom = "8px";
+            li.innerHTML = `<strong>${nombre}</strong> <button onclick="this.parentElement.remove()" style="color:red; cursor:pointer; margin-left:10px; border:none; background:none;">[Eliminar]</button>`;
+            
+            ul.appendChild(li); // Inserción en el DOM
+        }
+    </script>
+</body>
+</html>

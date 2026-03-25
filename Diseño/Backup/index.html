@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Hosanna - Inicio</title>
+    <style>
+        /* Variables y diseño base */
+        :root { --p: #5D4037; --a: #C5A059; --bg: #F9F7F2; }
+        body { background: var(--bg); font-family: 'Georgia', serif; margin: 0; text-align: center; color: #333; }
+        
+        /* Encabezado y Navegación */
+        header { background: var(--p); color: white; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-family: sans-serif; font-size: 0.95rem; }
+        nav a:hover { color: var(--a); }
+
+        /* Sección Principal (Hero) */
+        .hero { padding: 40px 20px; }
+        .descripcion-breve { max-width: 600px; margin: 0 auto 20px auto; font-size: 1.1rem; color: #555; }
+        
+        /* Carrusel Automático */
+        .carousel { width: 100%; max-width: 650px; height: 380px; margin: 20px auto; border: 8px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: relative; overflow: hidden; border-radius: 4px; }
+        .carousel img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease-in-out; }
+        .carousel img.active { opacity: 1; }
+
+        /* Botones e Interacciones */
+        .btn { background: var(--a); border: none; padding: 12px 25px; cursor: pointer; font-weight: bold; color: var(--p); border-radius: 4px; font-size: 1rem; transition: background 0.3s; margin-top: 15px; }
+        .btn:hover { background: #b38f4d; }
+        #mensaje-dom { display: none; margin: 20px auto; padding: 15px; max-width: 500px; background: white; border-left: 5px solid var(--a); text-align: left; font-style: italic; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+        /* Sección de Noticias (Tarjetas) */
+        .seccion-noticias { background: white; padding: 50px 20px; margin-top: 40px; }
+        .grid-noticias { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; }
+        .tarjeta-noticia { background: var(--bg); border-top: 4px solid var(--p); padding: 25px; width: 280px; text-align: left; border-radius: 0 0 8px 8px; box-shadow: 0 3px 8px rgba(0,0,0,0.08); transition: transform 0.3s; }
+        .tarjeta-noticia:hover { transform: translateY(-5px); border-top: 4px solid var(--a); }
+        .fecha { font-family: sans-serif; font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 10px; }
+        .tarjeta-noticia h3 { margin: 0 0 10px 0; color: var(--p); }
+
+        /* Footer Obligatorio */
+        footer { background: var(--p); color: white; padding: 20px; font-family: sans-serif; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 style="margin: 0; letter-spacing: 2px;">HOSANNA</h1>
+        <nav>
+            <a href="index.html" data-i18n="inicio">Inicio</a>
+            <a href="nosotros.html" data-i18n="nosotros">Nosotros</a>
+            <a href="servicios.html" data-i18n="cachorros">Cachorros</a>
+            <a href="contacto.html" data-i18n="contacto">Contacto</a>
+            <a href="login.html" data-i18n="login">Iniciar Sesión</a>
+            
+            <select id="selector-idioma" onchange="cambiarIdioma(this.value)" style="margin-left:15px; padding:5px;">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+            </select>
+            <button onclick="toggleAltoContraste()" title="Modo Alto Contraste" style="cursor:pointer; padding:5px; margin-left:10px;">🌗</button>
+        </nav>
+        <div id="breadcrumbs" style="padding: 10px 40px; font-size: 0.85rem; background: #eee; color: #555;"></div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Excelencia y Majestuosidad Canina</h2>
+            <p class="descripcion-breve">
+                Bienvenidos a Hosanna. Dedicados a la preservación, salud y exposición de la raza Lebrel Afgano. 
+                Nuestra estructura de crianza garantiza el mejor temperamento y estándar mundial.
+            </p>
+
+            <div class="carousel">
+                <img src="https://i.pinimg.com/1200x/96/e7/eb/96e7eb3392a8666eb0df025ee29e417c.jpg" class="active" alt="Cachorro Afgano">
+                <img src="https://i.pinimg.com/736x/ec/5d/26/ec5d2683619395d97abec0eaeb9b77dc.jpg" alt="Afgano Dorado">
+                <img src="https://i.pinimg.com/736x/b4/be/fb/b4befbb80c91ccc340f48aa8836e7de6.jpg" alt="Afganos Corriendo">
+            </div>
+
+            <button class="btn" onclick="mostrarBienvenida(this)">Descubrir el Legado Hosanna</button>
+            
+            <div id="mensaje-dom">
+                <strong>¡Gracias por tu interés!</strong> El rediseño de Hosanna1 está enfocado en mejorar la experiencia de usuario y organizar el contenido para reflejar la verdadera elegancia de estos animales.
+            </div>
+        </section>
+
+        <section class="seccion-noticias">
+            <h2 style="margin-bottom: 40px; color: var(--p);">Últimas Novedades</h2>
+            <div class="grid-noticias">
+                
+                <article class="tarjeta-noticia">
+                    <span class="fecha">02 Marzo 2026</span>
+                    <h3>Campeonato Nacional</h3>
+                    <p>Nuestro ejemplar "Golden King" ha ganado el premio al Mejor de la Raza en la exposición de primavera. Un orgullo para nuestra línea de crianza.</p>
+                </article>
+
+                <article class="tarjeta-noticia">
+                    <span class="fecha">25 Febrero 2026</span>
+                    <h3>Consejos de Manto</h3>
+                    <p>Mantener el pelaje de un Afgano requiere técnica. Descubre los nuevos cepillos recomendados por nuestros expertos veterinarios.</p>
+                </article>
+
+                <article class="tarjeta-noticia">
+                    <span class="fecha">10 Febrero 2026</span>
+                    <h3>Lista de Espera 2026</h3>
+                    <p>Se ha abierto oficialmente la lista de espera para la camada de invierno. Visite nuestra sección de contacto para más detalles.</p>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Hosanna Afghan Hounds. Proyecto Académico de Rediseño Web.</p>
+    </footer>
+
+    <script>
+        // Funcionalidad de Carrusel Automático
+        let index = 0; 
+        const imagenes = document.querySelectorAll('.carousel img');
+        
+        setInterval(() => {
+            imagenes[index].classList.remove('active');
+            index = (index + 1) % imagenes.length;
+            imagenes[index].classList.add('active');
+        }, 5000); // Cambia cada 5 segundos
+
+        // Funcionalidad DOM Obligatoria: Mostrar contenido dinámico
+        function mostrarBienvenida(boton) {
+            const mensaje = document.getElementById('mensaje-dom');
+            // Manipulación de estilos en el DOM
+            if(mensaje.style.display === 'block') {
+                mensaje.style.display = 'none';
+                boton.innerText = "Descubrir el Legado Hosanna";
+            } else {
+                mensaje.style.display = 'block';
+                boton.innerText = "Ocultar información";
+            }
+        }
+    </script>
+</body>
+</html>

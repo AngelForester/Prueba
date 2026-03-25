@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nosotros - Hosanna</title>
+    <style>
+        :root { --p: #5D4037; --a: #C5A059; --bg: #F9F7F2; }
+        body { background: var(--bg); font-family: 'Georgia', serif; margin: 0; text-align: center; }
+        header { background: var(--p); color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; text-decoration: none; margin: 0 10px; font-family: sans-serif; }
+        .galeria { display: flex; justify-content: center; gap: 10px; margin: 20px; }
+        .galeria img { width: 200px; height: 150px; object-fit: cover; border: 2px solid var(--a); }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>HOSANNA</h1>
+        <nav>
+            <a href="index.html" data-i18n="inicio">Inicio</a>
+            <a href="nosotros.html" data-i18n="nosotros">Nosotros</a>
+            <a href="servicios.html" data-i18n="cachorros">Cachorros</a>
+            <a href="contacto.html" data-i18n="contacto">Contacto</a>
+            <a href="login.html" data-i18n="login">Iniciar Sesión</a>
+            
+            <select id="selector-idioma" onchange="cambiarIdioma(this.value)" style="margin-left:15px; padding:5px;">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+            </select>
+            <button onclick="toggleAltoContraste()" title="Modo Alto Contraste" style="cursor:pointer; padding:5px; margin-left:10px;">🌗</button>
+        </nav>
+        <div id="breadcrumbs" style="padding: 10px 40px; font-size: 0.85rem; background: #eee; color: #555;"></div>
+    </header>
+    <section>
+        <h2>Sobre Nosotros</h2>
+        <div class="galeria">
+            <img src="https://i.pinimg.com/1200x/96/e7/eb/96e7eb3392a8666eb0df025ee29e417c.jpg">
+            <img src="https://i.pinimg.com/736x/ec/5d/26/ec5d2683619395d97abec0eaeb9b77dc.jpg">
+            <img src="https://i.pinimg.com/736x/b4/be/fb/b4befbb80c91ccc340f48aa8836e7de6.jpg">
+        </div>
+        <h3>Nuestros Estándares</h3>
+        <ul style="display:inline-block; text-align:left;">
+            <li>Salud genética certificada. </li>
+            <li>Crianza en libertad. </li>
+        </ul>
+    </section>
+    
+    <section style="background: white; padding: 30px; margin-top: 30px; border-radius: 8px;">
+        <h2 data-i18n="mision">Misión</h2>
+        <p>Preservar la elegancia y salud genética de la raza Lebrel Afgano a nivel mundial.</p>
+        
+        <h2 data-i18n="vision">Visión</h2>
+        <p>Ser el criadero de referencia en Norteamérica para el año 2030, destacando por nuestro trato ético.</p>
+    
+        <h2 data-i18n="foda">Análisis FODA</h2>
+        <table style="width: 100%; text-align: left;">
+            <tr>
+                <th>Fortalezas</th>
+                <th>Oportunidades</th>
+            </tr>
+            <tr>
+                <td>Genética pura certificada.<br>Ubicación estratégica.</td>
+                <td>Creciente demanda de perros de exposición.<br>Venta de productos especializados.</td>
+            </tr>
+            <tr>
+                <th>Debilidades</th>
+                <th>Amenazas</th>
+            </tr>
+            <tr>
+                <td>Altos costos de mantenimiento.<br>Cuidados del manto complejos.</td>
+                <td>Cambios en normativas de crianza.<br>Competencia de criaderos europeos.</td>
+            </tr>
+        </table>
+    </section>
+</body>
+</html>
