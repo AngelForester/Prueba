@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - Hosanna</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>HOSANNA</h1>
+        <nav>
+            <a href="index.html" data-i18n="inicio">Inicio</a>
+            <a href="nosotros.html" data-i18n="nosotros">Nosotros</a>
+            <a href="servicios.html" data-i18n="cachorros">Cachorros</a>
+            <a href="contacto.html" data-i18n="contacto">Contacto</a>
+            <div id="nav-auth"><a href="login.html" data-i18n="login">Ingresar</a></div>
+            
+            <select id="selector-idioma" onchange="Controlador.cambiarIdioma(this.value)">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+            </select>
+            <button onclick="Controlador.toggleAltoContraste()" title="Accesibilidad">🌗</button>
+        </nav>
+    </header>
+    <div class="breadcrumbs-bar" id="breadcrumbs"></div>
+
+    <main>
+        <section>
+            <input type="text" id="buscador-sitio" data-i18n="buscar" placeholder="Buscar productos o ejemplares..." style="max-width: 500px; display: block; margin: 0 auto 30px;">
+            
+            <div class="grid">
+                <div class="card" data-tags="afgano perro cachorro golden">
+                    <h3>Golden King</h3><p>$1,200 USD</p>
+                    <button class="btn" onclick="Controlador.agregarAlCarrito('Golden King', 1200)" data-i18n="agregar_carrito">Agregar al carrito</button>
+                </div>
+                <div class="card" data-tags="champu pelo cuidado baño">
+                    <h3>Champú Especial Manto</h3><p>$45 USD</p>
+                    <button class="btn" onclick="Controlador.agregarAlCarrito('Champú Especial', 45)" data-i18n="agregar_carrito">Agregar al carrito</button>
+                </div>
+                </div>
+
+            <div class="carrito-panel">
+                <h3>🛒 Tu Carrito</h3>
+                <ul id="lista-carrito" style="list-style: none; padding: 0;"></ul>
+                <h4 style="text-align: right;">Total: $<span id="total-carrito">0.00</span></h4>
+                <button class="btn" style="background: var(--primary); color: white;" onclick="Controlador.finalizarCompra()" data-i18n="finalizar_compra">Finalizar Compra</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/modelo.js"></script>
+    <script src="js/controlador.js"></script>
+</body>
+</html>
